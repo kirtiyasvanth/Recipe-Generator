@@ -11,7 +11,11 @@ load_dotenv()
 app = Flask(__name__, template_folder='frontend', static_folder='frontend', static_url_path='')
 
 # Initialize orchestrator
-api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GEMINI_API_KEY1")
+api_key = os.getenv("GEMINI_API_KEY")
+
+if not api_key:
+    raise ValueError("Missing GEMINI_API_KEY")
+
 orchestrator = RecipeOrchestrator(api_key=api_key)
 
 @app.route('/')
@@ -45,9 +49,4 @@ def generate():
         # In a production app we'd render an error page
         return f"<h1>Error generating recipe</h1><p>{str(e)}</p><a href='/input.html'>Go back</a>"
 
-if __name__ == '__main__':
-    print("=" * 60)
-    print("Starting AI Chef Web Application...")
-    print("Open http://127.0.0.1:5000 in your browser.")
-    print("=" * 60)
-    app.run(debug=True, port=5000)
+

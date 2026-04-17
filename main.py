@@ -25,10 +25,10 @@ def main():
     print("=" * 60)
     
     # Initialize orchestrator
-    api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GEMINI_API_KEY1")
+    api_key = os.getenv("GEMINI_API_KEY")
+    
     if not api_key:
-        print("\n[WARNING] GEMINI_API_KEY not set. Using mock responses.")
-        print("   Set GEMINI_API_KEY environment variable in your .env file for better results.\n")
+        raise ValueError("Missing GEMINI_API_KEY")
     
     orchestrator = RecipeOrchestrator(api_key=api_key)
     

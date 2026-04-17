@@ -18,6 +18,10 @@ def demo():
     
     # Initialize orchestrator
     api_key = os.getenv("GEMINI_API_KEY")
+    
+    if not api_key:
+        raise ValueError("Missing GEMINI_API_KEY")
+        
     orchestrator = RecipeOrchestrator(api_key=api_key)
     
     # Demo examples

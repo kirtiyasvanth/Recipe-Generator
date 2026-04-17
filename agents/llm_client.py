@@ -31,20 +31,15 @@ class LLMClient:
         if not self._api_keys:
             from dotenv import load_dotenv
             load_dotenv()
-            # Try to get up to 5 keys
-            keys = []
-            for i in range(1, 6):
-                key = os.getenv(f"GEMINI_API_KEY{i}")
-                if key:
-                    keys.append(key)
             
-            # Fallback to single key
-            if not keys:
-                key = api_key or os.getenv("GEMINI_API_KEY")
-                if key:
-                    keys.append(key)
+            # Standardize on GEMINI_API_KEY as requested
+            env_key = os.getenv("GEMINI_API_KEY")
+            key = api_key or env_key
             
-            self.__class__._api_keys = keys
+            if not key:
+                raise ValueError("Missing GEMINI_API_KEY")
+            
+            self.__class__._api_keys = [key]
             
         self.model = model
         self._cache = {}
