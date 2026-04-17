@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chef | Recipe Generator</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">
+            🧑‍🍳 AI<span>Chef</span>
+        </a>
+    </header>
+
+    <main>
+        <div class="hero">
+            <div class="hero-content animate-fade-in">
+                <h1>What are you <span>craving</span> today?</h1>
+                <p>Meet your personal AI culinary genius. Describe what you want to eat, and our multi-agent AI system will craft the perfect recipe tailored exactly to your tastes, diet, and local ingredients.</p>
+                
+                <a href="input.html" class="btn btn-primary animate-fade-in delay-1">
+                    Let's Eat! 🍽️
+                </a>
+            </div>
+            
+            <div class="hero-image animate-fade-in delay-2">
+                <div class="floating-emoji">🥗</div>
+                
+                <div class="floating-badge badge-1">
+                    <span>✨</span> Multi-Agent AI
+                </div>
+                
+                <div class="floating-badge badge-2">
+                    <span>🌱</span> Diet Adapted
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Preload next page
+        const link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.href = 'input.html';
+        document.head.appendChild(link);
+    </script>
+</body>
+</html>

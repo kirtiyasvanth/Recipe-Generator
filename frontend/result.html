@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chef | Your Recipe</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">
+            🧑‍🍳 AI<span>Chef</span>
+        </a>
+        <a href="input.html" class="btn btn-secondary" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">
+            Cook Another 🔄
+        </a>
+    </header>
+
+    <main>
+        <div class="result-container animate-fade-in">
+            <div class="recipe-header">
+                <div class="recipe-emoji">🥘</div>
+                <h1 class="recipe-title">{{ result.summary.dish }}</h1>
+                
+                <div class="recipe-meta">
+                    <span class="meta-tag">🌍 {{ result.summary.cuisine }}</span>
+                    <span class="meta-tag">🍽️ {{ result.summary.meal_type | title }}</span>
+                    <span class="meta-tag">🥦 {{ result.summary.dietary_type | title }}</span>
+                    <span class="meta-tag">⏱️ Prep: {{ result.summary.prep_time }}m | Cook: {{ result.summary.cook_time }}m</span>
+                    <span class="meta-tag">👥 {{ result.recipe.servings }} Servings</span>
+                </div>
+            </div>
+
+            <div class="glass-card animate-fade-in delay-1" style="margin-bottom: 2rem;">
+                <p style="font-size: 1.2rem; color: var(--dark); text-align: center; font-style: italic;">
+                    "{{ result.recipe.description }}"
+                </p>
+            </div>
+
+            <div class="recipe-grid">
+                <!-- Left Column -->
+                <div class="animate-fade-in delay-2">
+                    <div class="recipe-section glass-card" style="padding: 2rem;">
+                        <h3>🛒 Ingredients</h3>
+                        <ul class="ingredients-list">
+                            {% for ing in result.recipe.ingredients %}
+                            <li>✅ {{ ing.quantity }} {{ ing.unit }} {{ ing.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    {% if result.recipe.nutrition_info %}
+                    <div class="recipe-section glass-card" style="padding: 2rem;">
+                        <h3>📊 Nutrition (per serving)</h3>
+                        <div class="nutrition-grid">
+                            <div class="nutrition-box">
+                                <span>Calories</span>
+                                <strong>{{ result.recipe.nutrition_info.calories }}</strong>
+                            </div>
+                            <div class="nutrition-box">
+                                <span>Protein</span>
+                                <strong>{{ result.recipe.nutrition_info.protein }}</strong>
+                            </div>
+                            <div class="nutrition-box">
+                                <span>Carbs</span>
+                                <strong>{{ result.recipe.nutrition_info.carbs }}</strong>
+                            </div>
+                            <div class="nutrition-box">
+                                <span>Fat</span>
+                                <strong>{{ result.recipe.nutrition_info.fat }}</strong>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Right Column -->
+                <div class="animate-fade-in delay-3">
+                    <div class="recipe-section glass-card" style="padding: 2rem; height: 100%;">
+                        <h3>📝 Instructions</h3>
+                        <ul class="instructions-list">
+                            {% for step in result.recipe.instructions %}
+                            <li>{{ step }}</li>
+                            {% endfor %}
+                        </ul>
+
+                        {% if result.recipe.tips %}
+                        <h3 style="margin-top: 3rem; color: var(--secondary);">💡 Pro Tips</h3>
+                        <ul style="list-style-type: '👉 '; padding-left: 1.5rem; line-height: 1.8;">
+                            {% for tip in result.recipe.tips %}
+                            <li>{{ tip }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="glass-card animate-fade-in delay-3" style="margin-top: 2rem; padding: 2rem; text-align: center; border: 2px solid #ff000033;">
+                <h3 style="color: #ff0000; margin-bottom: 1rem;">🎥 Watch Video Tutorial</h3>
+                <p style="margin-bottom: 1.5rem;">Need a visual guide? Watch the top-rated video tutorial for this recipe on YouTube.</p>
+                <a href="{{ result.youtube_url }}" target="_blank" class="btn btn-primary" style="background: #ff0000; border: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+                    Watch on YouTube 📺
+                </a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chef | Tell Us Your Cravings</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">
+            🧑‍🍳 AI<span>Chef</span>
+        </a>
+    </header>
+
+    <main>
+        <div class="glass-card input-container animate-fade-in">
+            <h2>What are you hungry for? 🤤</h2>
+            <p>Tell the AI your dietary preferences and where you are, so we can craft the perfect local dish for you.</p>
+
+            <form id="recipeForm" action="/generate" method="POST">
+                <div class="form-group animate-fade-in delay-1">
+                    <label for="preferences">Your Food Preferences</label>
+                    <input type="text" id="preferences" name="preferences" class="form-control" placeholder="e.g., I want something sweet in vegetarian" required>
+                </div>
+
+                <div class="form-group animate-fade-in delay-2">
+                    <label for="location">Location (City, Country)</label>
+                    <input type="text" id="location" name="location" class="form-control" placeholder="e.g., Coimbatore, India (or leave blank to auto-detect)">
+                </div>
+
+                <button type="submit" class="btn btn-primary animate-fade-in delay-3" style="width: 100%; margin-top: 1rem;">
+                    Generate My Recipe ✨
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Script to show loading state -->
+    <script>
+        document.getElementById('recipeForm').addEventListener('submit', function() {
+            const btn = this.querySelector('button');
+            btn.innerHTML = 'AI Agents are cooking... 👨‍🍳🔥';
+            btn.style.opacity = '0.8';
+        });
+    </script>
+</body>
+</html>
